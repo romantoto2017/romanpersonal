@@ -1,0 +1,117 @@
+@import './fuentes.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --nav-h: 62px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-papel text-tinta font-sans antialiased;
+    margin: 0;
+    overscroll-behavior-y: none;
+  }
+
+  /* Textura sutil de papel */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background-image: radial-gradient(rgba(43, 38, 34, 0.045) 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* evita el zoom automático de iOS al enfocar */
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@layer components {
+  .tarjeta {
+    @apply rounded-tarjeta border border-borde/85 bg-arena;
+  }
+
+  .titulo {
+    @apply font-serif font-semibold tracking-[-0.01em];
+  }
+
+  .etiqueta {
+    @apply text-[10px] font-medium uppercase tracking-[0.14em] text-tinta-suave;
+  }
+
+  .campo {
+    @apply w-full rounded-lg border border-borde/25 bg-arena px-3 py-2.5 text-[15px]
+           placeholder:text-tinta-suave/60 focus:border-terracota focus:outline-none
+           focus:ring-2 focus:ring-terracota/20;
+  }
+
+  .boton {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm
+           font-medium transition active:scale-[0.97];
+  }
+
+  .boton-lleno {
+    @apply boton bg-terracota text-arena;
+  }
+
+  .boton-borde {
+    @apply boton border border-borde/40 bg-arena text-tinta;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-borde/30 bg-arena
+           px-3 py-1.5 text-[13px] transition active:scale-[0.97];
+  }
+
+  .chip-activo {
+    @apply border-terracota bg-terracota text-arena;
+  }
+
+  /* Área táctil cómoda para usar con una mano */
+  .tap {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+.scroll-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
