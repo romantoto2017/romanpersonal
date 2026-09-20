@@ -1,0 +1,639 @@
+{% comment %}
+  ------------------------------------------------------------------
+  Egeo Shop — Hero de portada
+  ------------------------------------------------------------------
+  Bloque de tema autocontenido para Shopify Horizon (nueva arquitectura).
+
+  - No depende de archivos del tema: se puede actualizar Horizon sin tocar esto.
+  - Sin JavaScript, sin imagenes de fondo, sin CDNs ni librerias.
+  - Todo el CSS vive en una sola etiqueta stylesheet, con clases .egeo-hero-*
+  - Los valores configurables viajan como variables CSS en el atributo style
+    del elemento raiz, asi el CSS puede ser estatico y cacheable.
+
+  Como usarlo en el editor de temas:
+    1. Portada > Agregar seccion (arriba de la grilla de categorias).
+    2. Dentro de esa seccion, Agregar bloque > "Hero Egeo Shop".
+    3. En la seccion contenedora: padding arriba/abajo = 0, ancho = completo.
+  ------------------------------------------------------------------
+{% endcomment %}
+
+{%- liquid
+  assign s = block.settings
+
+  # --- Colores con respaldo, por si algun campo queda vacio en el editor ---
+  assign c_grad_1 = s.color_gradient_1
+  if c_grad_1 == blank
+    assign c_grad_1 = '#0B3B66'
+  endif
+
+  assign c_grad_2 = s.color_gradient_2
+  if c_grad_2 == blank
+    assign c_grad_2 = '#015A94'
+  endif
+
+  assign c_text = s.color_text
+  if c_text == blank
+    assign c_text = '#FFFFFF'
+  endif
+
+  assign c_button = s.color_button
+  if c_button == blank
+    assign c_button = '#E63946'
+  endif
+
+  assign c_button_text = s.color_button_text
+  if c_button_text == blank
+    assign c_button_text = '#FFFFFF'
+  endif
+
+  assign c_pattern = s.color_pattern
+  if c_pattern == blank
+    assign c_pattern = '#FFFFFF'
+  endif
+
+  # --- Opacidades de la reticula: la de acento es ~2.2x la base ---
+  assign line_alpha = s.pattern_opacity | divided_by: 100.0
+  assign line_alpha_strong = s.pattern_opacity | times: 2.2 | divided_by: 100.0
+  if line_alpha_strong > 0.20
+    assign line_alpha_strong = 0.20
+  endif
+
+  assign line_color = c_pattern | color_modify: 'alpha', line_alpha
+  assign line_color_strong = c_pattern | color_modify: 'alpha', line_alpha_strong
+
+  # --- Etiqueta del titulo (h1 por defecto: es lo primero de la portada) ---
+  assign heading_tag = s.heading_tag | default: 'h1'
+
+  assign has_logo = false
+  if s.logo != blank
+    assign has_logo = true
+  endif
+
+  assign has_cta = false
+  if s.button_label != blank
+    assign has_cta = true
+  endif
+-%}
+
+<div
+  class="egeo-hero egeo-hero--align-{{ s.text_align }} egeo-hero--space-{{ s.spacing }}{% if s.full_width %} egeo-hero--full{% endif %}{% if s.animate %} egeo-hero--animated{% endif %}"
+  style="
+    --egeo-hero-grad-1: {{ c_grad_1 }};
+    --egeo-hero-grad-2: {{ c_grad_2 }};
+    --egeo-hero-text: {{ c_text }};
+    --egeo-hero-btn: {{ c_button }};
+    --egeo-hero-btn-text: {{ c_button_text }};
+    --egeo-hero-line: {{ line_color }};
+    --egeo-hero-line-strong: {{ line_color_strong }};
+    --egeo-hero-angle: {{ s.gradient_angle }}deg;
+    --egeo-hero-duration: {{ s.animation_duration }}s;
+    --egeo-hero-cell: {{ s.pattern_cell }}px;
+    --egeo-hero-logo-h: {{ s.logo_height }}px;
+    --egeo-hero-content-max: {{ s.content_width }}rem;
+    --egeo-hero-radius: {{ s.border_radius }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- comment -%} Capa 1: degradado diagonal en movimiento (solo transform) {%- endcomment -%}
+  <div class="egeo-hero__gradient" aria-hidden="true"></div>
+
+  {%- comment -%} Capa 2: reticula tipo plano tecnico, estatica {%- endcomment -%}
+  <div class="egeo-hero__grid" aria-hidden="true"></div>
+
+  <div class="egeo-hero__inner">
+    {%- if has_logo -%}
+      <div class="egeo-hero__logo">
+        {%- assign logo_alt = s.logo.alt | default: s.heading -%}
+        {{
+          s.logo
+          | image_url: width: 900
+          | image_tag:
+            class: 'egeo-hero__logo-img',
+            alt: logo_alt,
+            loading: 'eager',
+            fetchpriority: 'high',
+            decoding: 'async',
+            sizes: '(max-width: 749px) 55vw, 320px',
+            widths: '120, 180, 240, 320, 420, 560, 720, 900'
+        }}
+      </div>
+    {%- endif -%}
+
+    {%- if s.heading != blank -%}
+      <{{ heading_tag }} class="egeo-hero__title">{{ s.heading | escape }}</{{ heading_tag }}>
+    {%- endif -%}
+
+    {%- if s.subheading != blank -%}
+      <p class="egeo-hero__subtitle">{{ s.subheading | escape }}</p>
+    {%- endif -%}
+
+    {%- if s.trust_line != blank -%}
+      <p class="egeo-hero__trust">{{ s.trust_line | escape }}</p>
+    {%- endif -%}
+
+    {%- if has_cta -%}
+      <div class="egeo-hero__cta-wrap">
+        <a
+          class="egeo-hero__cta"
+          href="{{ s.button_link | default: '/collections/all' }}"
+        >
+          {{- s.button_label | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .egeo-hero {
+    position: relative;
+    display: block;
+    width: 100%;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--egeo-hero-text, #ffffff);
+    /* Color base: si el degradado tardara un frame en pintar, nunca hay flash blanco. */
+    background-color: var(--egeo-hero-grad-1, #0b3b66);
+    border-radius: var(--egeo-hero-radius, 0px);
+    /* Acota el repintado a esta caja: ayuda al scroll en telefonos de gama baja. */
+    contain: layout paint style;
+  }
+
+  .egeo-hero *,
+  .egeo-hero *::before,
+  .egeo-hero *::after {
+    box-sizing: border-box;
+  }
+
+  /* Rompe el contenedor de la seccion. Ojo: puede provocar scroll horizontal
+     en escritorio si el navegador muestra barra de scroll clasica.
+     Preferir poner la seccion en "ancho completo" desde el editor. */
+  .egeo-hero--full {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    border-radius: 0;
+  }
+
+  /* ---------------------------------------------------------------
+     Capa 1 — degradado diagonal animado
+     Se sobredimensiona un 20% por lado y se desplaza con translate3d,
+     que la GPU resuelve sin repintar ni recalcular layout.
+     --------------------------------------------------------------- */
+  .egeo-hero__gradient {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background-image: linear-gradient(
+      var(--egeo-hero-angle, 135deg),
+      var(--egeo-hero-grad-1, #0b3b66) 0%,
+      var(--egeo-hero-grad-2, #015a94) 28%,
+      var(--egeo-hero-grad-1, #0b3b66) 52%,
+      var(--egeo-hero-grad-2, #015a94) 78%,
+      var(--egeo-hero-grad-1, #0b3b66) 100%
+    );
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+
+  .egeo-hero--animated .egeo-hero__gradient {
+    animation: egeo-hero-drift var(--egeo-hero-duration, 24s) ease-in-out infinite alternate;
+  }
+
+  /* alternate + ease-in-out: llega al extremo frenando y vuelve.
+     Sin corte al reiniciar el ciclo, sin pulsos de brillo. */
+  @keyframes egeo-hero-drift {
+    from {
+      transform: translate3d(-5%, -3%, 0);
+    }
+    to {
+      transform: translate3d(5%, 3%, 0);
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     Capa 2 — reticula tipo papel milimetrado / plano tecnico
+     Cuatro degradados repetidos: dos finos (base) y dos de acento
+     cada 5 celdas. Estatico: se pinta una sola vez.
+     La mascara la aclara en el centro para no pelear con el texto.
+     --------------------------------------------------------------- */
+  .egeo-hero__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        var(--egeo-hero-line-strong) 0 1px,
+        transparent 1px calc(var(--egeo-hero-cell, 22px) * 5)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        var(--egeo-hero-line-strong) 0 1px,
+        transparent 1px calc(var(--egeo-hero-cell, 22px) * 5)
+      ),
+      repeating-linear-gradient(
+        to right,
+        var(--egeo-hero-line) 0 1px,
+        transparent 1px var(--egeo-hero-cell, 22px)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        var(--egeo-hero-line) 0 1px,
+        transparent 1px var(--egeo-hero-cell, 22px)
+      );
+    -webkit-mask-image: radial-gradient(115% 85% at 50% 50%, rgba(0, 0, 0, 0.35) 0%, #000 72%);
+    mask-image: radial-gradient(115% 85% at 50% 50%, rgba(0, 0, 0, 0.35) 0%, #000 72%);
+  }
+
+  /* ---------------------------------------------------------------
+     Contenido
+     --------------------------------------------------------------- */
+  .egeo-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 2vw, 0.85rem);
+    max-width: var(--egeo-hero-content-max, 46rem);
+    margin-inline: auto;
+    padding-block: var(--egeo-hero-pad, clamp(2rem, 8vw, 4rem));
+    padding-inline: clamp(1.125rem, 5vw, 2.5rem);
+  }
+
+  .egeo-hero--space-compact .egeo-hero__inner {
+    --egeo-hero-pad: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  .egeo-hero--space-normal .egeo-hero__inner {
+    --egeo-hero-pad: clamp(2rem, 8vw, 4rem);
+  }
+  .egeo-hero--space-roomy .egeo-hero__inner {
+    --egeo-hero-pad: clamp(2.75rem, 11vw, 5.5rem);
+  }
+
+  .egeo-hero--align-center .egeo-hero__inner {
+    align-items: center;
+    text-align: center;
+  }
+  .egeo-hero--align-left .egeo-hero__inner {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .egeo-hero__logo {
+    display: block;
+    margin-bottom: clamp(0.15rem, 1vw, 0.4rem);
+    line-height: 0;
+  }
+
+  .egeo-hero__logo-img {
+    display: block;
+    width: auto;
+    height: clamp(44px, 14vw, var(--egeo-hero-logo-h, 72px));
+    max-width: min(70%, 320px);
+    object-fit: contain;
+  }
+
+  .egeo-hero--align-center .egeo-hero__logo-img {
+    margin-inline: auto;
+  }
+
+  .egeo-hero__title {
+    margin: 0;
+    font-size: clamp(1.85rem, 7.5vw, 3.5rem);
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--egeo-hero-text, #ffffff);
+    text-wrap: balance;
+    /* Red de seguridad de contraste si alguien aclara los azules desde el editor. */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  }
+
+  .egeo-hero__subtitle {
+    margin: 0;
+    font-size: clamp(1rem, 3.6vw, 1.35rem);
+    line-height: 1.35;
+    font-weight: 400;
+    color: var(--egeo-hero-text, #ffffff);
+    opacity: 0.95;
+    text-wrap: pretty;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+  }
+
+  .egeo-hero__trust {
+    margin: 0;
+    font-size: clamp(0.82rem, 3vw, 0.95rem);
+    line-height: 1.45;
+    color: var(--egeo-hero-text, #ffffff);
+    opacity: 0.85;
+    text-wrap: pretty;
+  }
+
+  /* --- Boton principal ---------------------------------------------
+     Se envuelve en un div propio para que el ancho lo marque el texto
+     y no el estiramiento del flex contenedor, tambien en celular. */
+  .egeo-hero__cta-wrap {
+    display: block;
+    width: 100%;
+    margin-top: clamp(0.5rem, 2.5vw, 1rem);
+  }
+
+  .egeo-hero--align-center .egeo-hero__cta-wrap {
+    text-align: center;
+  }
+
+  .egeo-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: calc(100% - 1.5rem);
+    min-height: 50px;
+    margin-inline: 0.75rem;
+    padding: 0.9rem 1.9rem;
+    border: 0;
+    border-radius: 999px;
+    background-color: var(--egeo-hero-btn, #e63946);
+    color: var(--egeo-hero-btn-text, #ffffff);
+    /* 1.175rem = 18.8px. Texto en negrita a 18.66px o mas cuenta como
+       "texto grande" en WCAG, cuyo umbral es 3:1. Blanco sobre #E63946 da
+       4.17:1, que pasa holgado a este tamano pero NO llegaria a los 4.5:1
+       que exige el texto chico. No bajar de 1.175rem. */
+    font-size: clamp(1.175rem, 4vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-align: center;
+    text-decoration: none;
+    /* El halo claro define el borde del boton: el rojo contra el azul solo
+       da 1.74:1 de luminancia, el contraste lo aporta el tono, no el brillo. */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  }
+
+  .egeo-hero__cta:hover {
+    color: var(--egeo-hero-btn-text, #ffffff);
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+    box-shadow: 0 9px 22px rgba(0, 0, 0, 0.26), 0 0 0 1px rgba(255, 255, 255, 0.28);
+  }
+
+  .egeo-hero__cta:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .egeo-hero__cta:focus-visible {
+    outline: 3px solid var(--egeo-hero-text, #ffffff);
+    outline-offset: 3px;
+  }
+
+  /* ---------------------------------------------------------------
+     Accesibilidad y rendimiento
+     --------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .egeo-hero--animated .egeo-hero__gradient {
+      animation: none;
+      transform: none;
+    }
+    .egeo-hero__cta {
+      transition: none;
+    }
+    .egeo-hero__cta:hover {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Egeo Shop",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (opcional)",
+      "info": "Se muestra arriba del título. Se recomienda PNG o SVG con fondo transparente."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Alto del logo",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Egeo Shop"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Jerarquía del título",
+      "info": "Si el hero es lo primero de la portada, dejar H1.",
+      "options": [
+        { "value": "h1", "label": "H1 (recomendado en la portada)" },
+        { "value": "h2", "label": "H2" },
+        { "value": "p", "label": "Sin jerarquia" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Bazar, ferretería y todo para tu casa"
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Línea de confianza",
+      "default": "Envíos a todo el país o retiro en tienda — Av. Agraciada 3008, Montevideo"
+    },
+    {
+      "type": "header",
+      "content": "Botón principal"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "info": "Si se deja vacío, el botón no se muestra.",
+      "default": "Ver catálogo"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón",
+      "info": "Elegir la colección principal de la tienda.",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "color_gradient_1",
+      "label": "Azul oscuro (degradado)",
+      "default": "#0B3B66"
+    },
+    {
+      "type": "color",
+      "id": "color_gradient_2",
+      "label": "Azul medio (degradado)",
+      "default": "#015A94"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Color del texto",
+      "info": "Mantener el blanco: garantiza contraste suficiente sobre los azules de marca.",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Fondo del botón",
+      "default": "#E63946"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "Texto del botón",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "color_pattern",
+      "label": "Color de las líneas del patrón",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Fondo animado"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate",
+      "label": "Animar el degradado",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Duración del ciclo",
+      "info": "Más alto = más lento. Se ignora si el teléfono tiene activado 'reducir movimiento'.",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "s",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Ángulo del degradado",
+      "min": 0,
+      "max": 345,
+      "step": 15,
+      "unit": "°",
+      "default": 135
+    },
+    {
+      "type": "header",
+      "content": "Patrón de líneas"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity",
+      "label": "Intensidad de las líneas",
+      "info": "Entre 4 y 6 se percibe como textura sin competir con el texto. 0 lo apaga.",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "pattern_cell",
+      "label": "Tamaño de la cuadrícula",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "Diseño y espaciado"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alineación",
+      "options": [
+        { "value": "center", "label": "Centrado" },
+        { "value": "left", "label": "Izquierda" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Altura del hero",
+      "info": "En celular conviene 'Compacto' para que las categorías se vean sin bajar.",
+      "options": [
+        { "value": "compact", "label": "Compacto" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "roomy", "label": "Amplio" }
+      ],
+      "default": "compact"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Ancho máximo del texto",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "unit": "rem",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Redondeo de las esquinas",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Forzar ancho completo de pantalla",
+      "info": "Dejar apagado si es posible: es preferible poner la sección contenedora en ancho completo desde el editor. Encendido puede generar scroll horizontal en escritorio.",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Egeo Shop"
+    }
+  ]
+}
+{% endschema %}
