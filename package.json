@@ -1,0 +1,14 @@
+{
+  "name": "once-uruguayo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "node scraper/scrape.mjs",
+    "scrape:cache": "node scraper/scrape.mjs --solo-cache",
+    "test": "node --test tests/*.test.js",
+    "serve": "npx --yes http-server -c-1 -p 8080 ."
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
