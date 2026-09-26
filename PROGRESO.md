@@ -3,7 +3,7 @@
 > Leé SOLO este archivo al retomar. No releas archivos grandes ni vuelvas a pedir páginas que ya estén en /cache.
 
 ## Etapa actual
-**ETAPA 1 — casi completa.** Motor + UI terminados y testeados. Faltan los 5 partidos verificados.
+**ETAPA 1 — motor + UI aprobados por el usuario.** Faltan los 5 partidos verificados (bloqueado por red). Etapa 2 también necesita Transfermarkt.
 
 **Bloqueo:** desde el entorno cloud de Claude Code, `www.transfermarkt.*` está bloqueado por la política de red (el proxy rechaza la conexión, 403). No se hizo ningún request exitoso a Transfermarkt y no se cargó ningún dato de memoria.
 Opciones para destrabar:
