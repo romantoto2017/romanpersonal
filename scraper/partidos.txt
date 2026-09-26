@@ -1,0 +1,5 @@
+# Lista de partidos a scrapear (orden = orden de niveles, de fácil a difícil).
+# Formato:  URL_DEL_PARTIDO_EN_TRANSFERMARKT | local|visitante | dato curioso (opcional, solo si sale de Transfermarkt)
+# "local"/"visitante" indica de qué equipo es el once a adivinar.
+# Ejemplo (formato, no es un partido elegido):
+# https://www.transfermarkt.com/spielbericht/index/spielbericht/1234567 | visitante | Final del Campeonato Uruguayo

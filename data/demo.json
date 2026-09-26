@@ -1,0 +1,126 @@
+[
+  {
+    "id": "demo-1",
+    "fecha": "2024-01-01",
+    "competicion": "Partido de prueba (DATOS FICTICIOS)",
+    "ronda": "",
+    "local": "Club Demo",
+    "visitante": "Rival Demo",
+    "resultado": "2-1",
+    "equipo_del_once": "local",
+    "club_once": null,
+    "club_rival": null,
+    "formacion": "4-3-3",
+    "dato_curioso": "Nivel de demostración con nombres inventados: no es un partido real.",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Pereyra",
+        "apellido_juego": "PEREYRA",
+        "nombre_completo": "Jugador ficticio Pereyra",
+        "posicion": "POR",
+        "capitan": false,
+        "fila": 0
+      },
+      {
+        "numero": 4,
+        "apellido_mostrar": "Da Silva",
+        "apellido_juego": "DASILVA",
+        "nombre_completo": "Jugador ficticio Da Silva",
+        "posicion": "LD",
+        "capitan": false,
+        "fila": 1
+      },
+      {
+        "numero": 2,
+        "apellido_mostrar": "De León",
+        "apellido_juego": "DELEON",
+        "nombre_completo": "Jugador ficticio De León",
+        "posicion": "DFC",
+        "capitan": true,
+        "fila": 1
+      },
+      {
+        "numero": 6,
+        "apellido_mostrar": "Fernández",
+        "apellido_juego": "FERNANDEZ",
+        "nombre_completo": "Jugador ficticio Fernández",
+        "posicion": "DFC",
+        "capitan": false,
+        "fila": 1
+      },
+      {
+        "numero": 3,
+        "apellido_mostrar": "Muñoz",
+        "apellido_juego": "MUNOZ",
+        "nombre_completo": "Jugador ficticio Muñoz",
+        "posicion": "LI",
+        "capitan": false,
+        "fila": 1
+      },
+      {
+        "numero": 5,
+        "apellido_mostrar": "Rodríguez",
+        "apellido_juego": "RODRIGUEZ",
+        "nombre_completo": "Jugador ficticio Rodríguez",
+        "posicion": "MC",
+        "capitan": false,
+        "fila": 2
+      },
+      {
+        "numero": 8,
+        "apellido_mostrar": "Sosa",
+        "apellido_juego": "SOSA",
+        "nombre_completo": "Jugador ficticio Sosa",
+        "posicion": "MC",
+        "capitan": false,
+        "fila": 2
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Olivera",
+        "apellido_juego": "OLIVERA",
+        "nombre_completo": "Jugador ficticio Olivera",
+        "posicion": "MCO",
+        "capitan": false,
+        "fila": 2
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cabrera",
+        "apellido_juego": "CABRERA",
+        "nombre_completo": "Jugador ficticio Cabrera",
+        "posicion": "ED",
+        "capitan": false,
+        "fila": 3
+      },
+      {
+        "numero": 9,
+        "apellido_mostrar": "Castro",
+        "apellido_juego": "CASTRO",
+        "nombre_completo": "Jugador ficticio Castro",
+        "posicion": "DC",
+        "capitan": false,
+        "fila": 3
+      },
+      {
+        "numero": 11,
+        "apellido_mostrar": "Silveira",
+        "apellido_juego": "SILVEIRA",
+        "nombre_completo": "Jugador ficticio Silveira",
+        "posicion": "EI",
+        "capitan": false,
+        "fila": 3
+      }
+    ],
+    "url_transfermarkt": "",
+    "verificado": false,
+    "demo": true,
+    "colores_once": {
+      "primario": "#e8e8e8",
+      "secundario": "#6b2fa3",
+      "numero": "#6b2fa3",
+      "patron": "banda"
+    }
+  }
+]
