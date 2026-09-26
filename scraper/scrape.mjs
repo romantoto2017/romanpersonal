@@ -17,7 +17,7 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
-import { normalizar, parsearFormacion } from '../js/logic.js';
+import { normalizar, normalizarApellido, parsearFormacion } from '../js/logic.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE = path.join(ROOT, 'cache');
@@ -310,8 +310,10 @@ function armarPartido(entrada, htmlB, htmlA, equipos, overrides) {
     const ov = overrides[t.tm_id] || {};
     const { apellido_mostrar, motivos } = sacarApellido(c.corto, t.nombre_completo);
     const mostrar = ov.apellido_mostrar || apellido_mostrar;
-    const juego = normalizar(ov.apellido_juego || mostrar);
-    if (juego.length < 3 || juego.length > 15) motivos.push(`largo fuera de rango (${juego.length})`);
+    // Conserva el espacio en apellidos compuestos (se juegan como dos palabras, ej. "AREVALO RIOS").
+    const juego = normalizarApellido(ov.apellido_juego || mostrar);
+    const soloLetras = juego.replace(/ /g, '');
+    if (soloLetras.length < 3 || soloLetras.length > 15) motivos.push(`largo fuera de rango (${soloLetras.length})`);
     if (ov.apellido_mostrar || ov.apellido_juego) motivos.length = 0; // corregido a mano
     const j = {
       numero: t.numero ? Number(t.numero) : c.numero ? Number(c.numero) : null,

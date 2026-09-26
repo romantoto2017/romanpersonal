@@ -85,7 +85,8 @@ test('override manual pisa lo extraído', () => {
   const ov = { 1009: { apellido_mostrar: 'Pelado Díaz' } };
   const { partido } = armarPartido({ id: '1', lado: 'local', canonica: 'u' }, h, h, equipos, ov);
   const j = partido.jugadores.find((x) => x.numero === 9);
-  assert.equal(j.apellido_juego, 'PELADODIAZ');
+  // apellido compuesto: conserva el espacio (se juega como dos palabras)
+  assert.equal(j.apellido_juego, 'PELADO DIAZ');
 });
 
 test('sacarApellido', () => {

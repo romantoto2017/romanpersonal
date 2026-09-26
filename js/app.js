@@ -12,9 +12,9 @@ let panel = null; // { partido, idx, actual }
 function cargarEstado() {
   try {
     const s = JSON.parse(localStorage.getItem(CLAVE));
-    if (s && s.niveles) return { config: { arqueroPista: true, ...s.config }, niveles: s.niveles };
+    if (s && s.niveles) return { config: { arqueroPista: false, ...s.config }, niveles: s.niveles };
   } catch {}
-  return { config: { arqueroPista: true }, niveles: {} };
+  return { config: { arqueroPista: false }, niveles: {} };
 }
 let estado = cargarEstado();
 function guardar() {
@@ -264,7 +264,7 @@ function pintarCancha(p) {
             const j = p.jugadores[i];
             const e = estadoDe(p, i);
             const usados = (n.intentos[i] || []).length;
-            const txt = e === 'pendiente' ? '.'.repeat(j.apellido_juego.length) : esc(j.apellido_mostrar);
+            const txt = e === 'pendiente' ? j.apellido_juego.replace(/[^ ]/g, '.') : esc(j.apellido_mostrar);
             const cam = j.fila === 0 ? camisetaArquero(once) : once;
             return `<button class="jug ${e}" data-i="${i}" aria-label="Camiseta ${j.numero}">
               <span class="camiseta-wrap">${camisetaSVG(cam)}<span class="dorsal" style="color:${cam.numero};--sombra:${cam.primario}">${j.numero}</span>${j.capitan ? '<span class="capi">C</span>' : ''}</span>
@@ -304,7 +304,7 @@ function abrirPanel(p, idx) {
   el.id = 'panel';
   el.innerHTML = `
     <button class="btn-link" id="atras">← VOLVER</button>
-    <div class="info">#${j.numero}${j.posicion ? ' · ' + esc(j.posicion) : ''} · ${j.apellido_juego.length} letras</div>
+    <div class="info">#${j.numero}${j.posicion ? ' · ' + esc(j.posicion) : ''} · ${j.apellido_juego.replace(/ /g, '').length} letras</div>
     <div class="grilla" id="grilla"></div>
     <div class="teclado" id="teclado">${TECLAS.map(
       (f) =>
@@ -357,6 +357,10 @@ function pintarPanel(animarFila = -1) {
     const letras = g || (r === intentos.length ? actual : '');
     html += `<div class="fila-g" style="grid-template-columns:repeat(${L},${tam}px)">`;
     for (let c = 0; c < L; c++) {
+      if (sol[c] === ' ') {
+        html += `<div class="tile hueco" style="width:${Math.round(tam / 2)}px;height:${tam}px;"></div>`;
+        continue;
+      }
       const l = letras[c] || '';
       const cls = ev ? `${ev[c]}${r === animarFila ? ' flip' : ''}` : l ? 'lleno' : '';
       const delay = r === animarFila ? `animation-delay:${c * 60}ms;` : '';
@@ -376,9 +380,15 @@ function tecla(k) {
   if (!panel || panel.bloqueado) return;
   const { p, idx } = panel;
   const sol = p.jugadores[idx].apellido_juego;
-  if (k === 'BORRAR') panel.actual = panel.actual.slice(0, -1);
-  else if (k === 'ENVIAR') return enviar();
-  else if (/^[A-Z]$/.test(k) && panel.actual.length < sol.length) panel.actual += k;
+  if (k === 'BORRAR') {
+    panel.actual = panel.actual.slice(0, -1);
+    while (panel.actual.length && sol[panel.actual.length - 1] === ' ') panel.actual = panel.actual.slice(0, -1);
+  } else if (k === 'ENVIAR') return enviar();
+  else if (/^[A-Z]$/.test(k)) {
+    // los apellidos compuestos ("AREVALO RIOS") rellenan el espacio solos: no hace falta tipearlo.
+    while (panel.actual.length < sol.length && sol[panel.actual.length] === ' ') panel.actual += ' ';
+    if (panel.actual.length < sol.length) panel.actual += k;
+  }
   pintarPanel();
 }
 

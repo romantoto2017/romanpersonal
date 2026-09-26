@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizar, evaluar, estadoTeclado, estadoJugador, parsearFormacion } from '../js/logic.js';
+import { normalizar, normalizarApellido, evaluar, estadoTeclado, estadoJugador, parsearFormacion } from '../js/logic.js';
 
 test('normalizar', () => {
   assert.equal(normalizar('De Arrascaeta'), 'DEARRASCAETA');
@@ -8,6 +8,12 @@ test('normalizar', () => {
   assert.equal(normalizar('Muñoz'), 'MUNOZ');
   assert.equal(normalizar("D'Alessandro"), 'DALESSANDRO');
   assert.equal(normalizar('Cabrera-Rey'), 'CABRERAREY');
+});
+
+test('normalizarApellido conserva un espacio entre palabras', () => {
+  assert.equal(normalizarApellido('Arévalo Ríos'), 'AREVALO RIOS');
+  assert.equal(normalizarApellido('Pereira'), 'PEREIRA');
+  assert.equal(normalizarApellido('  De   León  '), 'DE LEON');
 });
 
 test('evaluar básico', () => {

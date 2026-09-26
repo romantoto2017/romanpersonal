@@ -143,6 +143,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .tile.verde { background: var(--verde); box-shadow: none; }
 .tile.amarillo { background: var(--amarillo); box-shadow: none; }
 .tile.gris { background: #334155; box-shadow: none; }
+.tile.hueco { background: none; box-shadow: none; }
 .tile.flip { animation: flip .35s ease both; }
 @keyframes flip { 0% { transform: scaleY(1); } 50% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
 .fila-g.sacudir { animation: sacudir .35s; }

@@ -12,6 +12,18 @@ export function normalizar(texto) {
     .replace(/[^A-Z]/g, '');
 }
 
+// Igual que normalizar(), pero conserva un solo espacio entre palabras (apellidos
+// compuestos como "Arévalo Ríos" se juegan como dos palabras, no como una sola).
+export function normalizarApellido(texto) {
+  return String(texto || '')
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toUpperCase()
+    .replace(/[^A-Z ]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 // Evaluación tipo Wordle con manejo correcto de letras repetidas:
 // 1) marca verdes; 2) con las letras sobrantes de la solución marca amarillos de izquierda a derecha.
 export function evaluar(intento, solucion) {
