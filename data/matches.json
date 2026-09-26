@@ -1,1 +1,652 @@
-[]
+[
+  {
+    "id": "tm-986777",
+    "fecha": "2010-06-16",
+    "competicion": "World Cup",
+    "ronda": "Group A",
+    "local": "South Africa",
+    "visitante": "Uruguay",
+    "resultado": "0-3",
+    "equipo_del_once": "visitante",
+    "club_once": "uruguay",
+    "club_rival": null,
+    "formacion": "4-4-2",
+    "dato_curioso": "",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Muslera",
+        "apellido_juego": "MUSLERA",
+        "nombre_completo": "Fernando Muslera",
+        "posicion": "Goalkeeper",
+        "capitan": false,
+        "tm_id": "58088",
+        "fila": 0
+      },
+      {
+        "numero": 4,
+        "apellido_mostrar": "Fucile",
+        "apellido_juego": "FUCILE",
+        "nombre_completo": "Jorge Fucile",
+        "posicion": "Left-Back",
+        "capitan": false,
+        "tm_id": "44057",
+        "fila": 1
+      },
+      {
+        "numero": 3,
+        "apellido_mostrar": "Godín",
+        "apellido_juego": "GODIN",
+        "nombre_completo": "Diego Godín",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "54928",
+        "fila": 1
+      },
+      {
+        "numero": 2,
+        "apellido_mostrar": "Lugano",
+        "apellido_juego": "LUGANO",
+        "nombre_completo": "Diego Lugano",
+        "posicion": "Centre-Back",
+        "capitan": true,
+        "tm_id": "13829",
+        "fila": 1
+      },
+      {
+        "numero": 16,
+        "apellido_mostrar": "M. Pereira",
+        "apellido_juego": "MPEREIRA",
+        "nombre_completo": "Maxi Pereira",
+        "posicion": "Right-Back",
+        "capitan": false,
+        "tm_id": "57834",
+        "fila": 1
+      },
+      {
+        "numero": 11,
+        "apellido_mostrar": "Á. Pereira",
+        "apellido_juego": "APEREIRA",
+        "nombre_completo": "Álvaro Pereira",
+        "posicion": "Left Midfield",
+        "capitan": false,
+        "tm_id": "54859",
+        "fila": 2
+      },
+      {
+        "numero": 17,
+        "apellido_mostrar": "Arévalo Ríos",
+        "apellido_juego": "AREVALORIOS",
+        "nombre_completo": "Egidio Arévalo Ríos",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "54818",
+        "fila": 2
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Forlán",
+        "apellido_juego": "FORLAN",
+        "nombre_completo": "Diego Forlán",
+        "posicion": "Attacking Midfield",
+        "capitan": false,
+        "tm_id": "3408",
+        "fila": 2
+      },
+      {
+        "numero": 15,
+        "apellido_mostrar": "Pérez",
+        "apellido_juego": "PEREZ",
+        "nombre_completo": "Diego Pérez",
+        "posicion": "Right Midfield",
+        "capitan": false,
+        "tm_id": "20378",
+        "fila": 2
+      },
+      {
+        "numero": 9,
+        "apellido_mostrar": "Suárez",
+        "apellido_juego": "SUAREZ",
+        "nombre_completo": "Luis Suárez",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "44352",
+        "fila": 3
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cavani",
+        "apellido_juego": "CAVANI",
+        "nombre_completo": "Edinson Cavani",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "48280",
+        "fila": 3
+      }
+    ],
+    "url_transfermarkt": "https://www.transfermarkt.com/spielbericht/index/spielbericht/986777",
+    "verificado": true,
+    "errores": [],
+    "avisos": []
+  },
+  {
+    "id": "tm-1026846",
+    "fecha": "2010-06-26",
+    "competicion": "World Cup",
+    "ronda": "Round of 16 1",
+    "local": "Uruguay",
+    "visitante": "South Korea",
+    "resultado": "2-1",
+    "equipo_del_once": "local",
+    "club_once": "uruguay",
+    "club_rival": null,
+    "formacion": "4-4-2",
+    "dato_curioso": "",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Muslera",
+        "apellido_juego": "MUSLERA",
+        "nombre_completo": "Fernando Muslera",
+        "posicion": "Goalkeeper",
+        "capitan": false,
+        "tm_id": "58088",
+        "fila": 0
+      },
+      {
+        "numero": 4,
+        "apellido_mostrar": "Fucile",
+        "apellido_juego": "FUCILE",
+        "nombre_completo": "Jorge Fucile",
+        "posicion": "Left-Back",
+        "capitan": false,
+        "tm_id": "44057",
+        "fila": 1
+      },
+      {
+        "numero": 3,
+        "apellido_mostrar": "Godín",
+        "apellido_juego": "GODIN",
+        "nombre_completo": "Diego Godín",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "54928",
+        "fila": 1
+      },
+      {
+        "numero": 2,
+        "apellido_mostrar": "Lugano",
+        "apellido_juego": "LUGANO",
+        "nombre_completo": "Diego Lugano",
+        "posicion": "Centre-Back",
+        "capitan": true,
+        "tm_id": "13829",
+        "fila": 1
+      },
+      {
+        "numero": 16,
+        "apellido_mostrar": "M. Pereira",
+        "apellido_juego": "MPEREIRA",
+        "nombre_completo": "Maxi Pereira",
+        "posicion": "Right-Back",
+        "capitan": false,
+        "tm_id": "57834",
+        "fila": 1
+      },
+      {
+        "numero": 11,
+        "apellido_mostrar": "Á. Pereira",
+        "apellido_juego": "APEREIRA",
+        "nombre_completo": "Álvaro Pereira",
+        "posicion": "Left Midfield",
+        "capitan": false,
+        "tm_id": "54859",
+        "fila": 2
+      },
+      {
+        "numero": 17,
+        "apellido_mostrar": "Arévalo Ríos",
+        "apellido_juego": "AREVALORIOS",
+        "nombre_completo": "Egidio Arévalo Ríos",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "54818",
+        "fila": 2
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Forlán",
+        "apellido_juego": "FORLAN",
+        "nombre_completo": "Diego Forlán",
+        "posicion": "Attacking Midfield",
+        "capitan": false,
+        "tm_id": "3408",
+        "fila": 2
+      },
+      {
+        "numero": 15,
+        "apellido_mostrar": "Pérez",
+        "apellido_juego": "PEREZ",
+        "nombre_completo": "Diego Pérez",
+        "posicion": "Right Midfield",
+        "capitan": false,
+        "tm_id": "20378",
+        "fila": 2
+      },
+      {
+        "numero": 9,
+        "apellido_mostrar": "Suárez",
+        "apellido_juego": "SUAREZ",
+        "nombre_completo": "Luis Suárez",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "44352",
+        "fila": 3
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cavani",
+        "apellido_juego": "CAVANI",
+        "nombre_completo": "Edinson Cavani",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "48280",
+        "fila": 3
+      }
+    ],
+    "url_transfermarkt": "https://www.transfermarkt.com/spielbericht/index/spielbericht/1026846",
+    "verificado": true,
+    "errores": [],
+    "avisos": []
+  },
+  {
+    "id": "tm-1027723",
+    "fecha": "2010-07-02",
+    "competicion": "World Cup",
+    "ronda": "Quarter-Finals 1",
+    "local": "Uruguay",
+    "visitante": "Ghana",
+    "resultado": "5-3",
+    "equipo_del_once": "local",
+    "club_once": "uruguay",
+    "club_rival": null,
+    "formacion": "4-3-1-2",
+    "dato_curioso": "",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Muslera",
+        "apellido_juego": "MUSLERA",
+        "nombre_completo": "Fernando Muslera",
+        "posicion": "Goalkeeper",
+        "capitan": false,
+        "tm_id": "58088",
+        "fila": 0
+      },
+      {
+        "numero": 4,
+        "apellido_mostrar": "Fucile",
+        "apellido_juego": "FUCILE",
+        "nombre_completo": "Jorge Fucile",
+        "posicion": "Left-Back",
+        "capitan": false,
+        "tm_id": "44057",
+        "fila": 1
+      },
+      {
+        "numero": 2,
+        "apellido_mostrar": "Lugano",
+        "apellido_juego": "LUGANO",
+        "nombre_completo": "Diego Lugano",
+        "posicion": "Centre-Back",
+        "capitan": true,
+        "tm_id": "13829",
+        "fila": 1
+      },
+      {
+        "numero": 6,
+        "apellido_mostrar": "Victorino",
+        "apellido_juego": "VICTORINO",
+        "nombre_completo": "Mauricio Victorino",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "44935",
+        "fila": 1
+      },
+      {
+        "numero": 16,
+        "apellido_mostrar": "M. Pereira",
+        "apellido_juego": "MPEREIRA",
+        "nombre_completo": "Maxi Pereira",
+        "posicion": "Right-Back",
+        "capitan": false,
+        "tm_id": "57834",
+        "fila": 1
+      },
+      {
+        "numero": 15,
+        "apellido_mostrar": "Pérez",
+        "apellido_juego": "PEREZ",
+        "nombre_completo": "Diego Pérez",
+        "posicion": "Central Midfield",
+        "capitan": false,
+        "tm_id": "20378",
+        "fila": 2
+      },
+      {
+        "numero": 17,
+        "apellido_mostrar": "Arévalo Ríos",
+        "apellido_juego": "AREVALORIOS",
+        "nombre_completo": "Egidio Arévalo Ríos",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "54818",
+        "fila": 2
+      },
+      {
+        "numero": 20,
+        "apellido_mostrar": "Fernández",
+        "apellido_juego": "FERNANDEZ",
+        "nombre_completo": "Álvaro Fernández",
+        "posicion": "Central Midfield",
+        "capitan": false,
+        "tm_id": "76213",
+        "fila": 2
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Forlán",
+        "apellido_juego": "FORLAN",
+        "nombre_completo": "Diego Forlán",
+        "posicion": "Attacking Midfield",
+        "capitan": false,
+        "tm_id": "3408",
+        "fila": 3
+      },
+      {
+        "numero": 9,
+        "apellido_mostrar": "Suárez",
+        "apellido_juego": "SUAREZ",
+        "nombre_completo": "Luis Suárez",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "44352",
+        "fila": 4
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cavani",
+        "apellido_juego": "CAVANI",
+        "nombre_completo": "Edinson Cavani",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "48280",
+        "fila": 4
+      }
+    ],
+    "url_transfermarkt": "https://www.transfermarkt.com/spielbericht/index/spielbericht/1027723",
+    "verificado": true,
+    "errores": [],
+    "avisos": []
+  },
+  {
+    "id": "tm-1029770",
+    "fecha": "2010-07-06",
+    "competicion": "World Cup",
+    "ronda": "Semi-Finals 1",
+    "local": "Uruguay",
+    "visitante": "Netherlands",
+    "resultado": "2-3",
+    "equipo_del_once": "local",
+    "club_once": "uruguay",
+    "club_rival": null,
+    "formacion": "4-4-2",
+    "dato_curioso": "",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Muslera",
+        "apellido_juego": "MUSLERA",
+        "nombre_completo": "Fernando Muslera",
+        "posicion": "Goalkeeper",
+        "capitan": false,
+        "tm_id": "58088",
+        "fila": 0
+      },
+      {
+        "numero": 22,
+        "apellido_mostrar": "Cáceres",
+        "apellido_juego": "CACERES",
+        "nombre_completo": "Martín Cáceres",
+        "posicion": "Left-Back",
+        "capitan": false,
+        "tm_id": "54935",
+        "fila": 1
+      },
+      {
+        "numero": 3,
+        "apellido_mostrar": "Godín",
+        "apellido_juego": "GODIN",
+        "nombre_completo": "Diego Godín",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "54928",
+        "fila": 1
+      },
+      {
+        "numero": 6,
+        "apellido_mostrar": "Victorino",
+        "apellido_juego": "VICTORINO",
+        "nombre_completo": "Mauricio Victorino",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "44935",
+        "fila": 1
+      },
+      {
+        "numero": 16,
+        "apellido_mostrar": "M. Pereira",
+        "apellido_juego": "MPEREIRA",
+        "nombre_completo": "Maxi Pereira",
+        "posicion": "Right-Back",
+        "capitan": false,
+        "tm_id": "57834",
+        "fila": 1
+      },
+      {
+        "numero": 11,
+        "apellido_mostrar": "Á. Pereira",
+        "apellido_juego": "APEREIRA",
+        "nombre_completo": "Álvaro Pereira",
+        "posicion": "Left Midfield",
+        "capitan": false,
+        "tm_id": "54859",
+        "fila": 2
+      },
+      {
+        "numero": 5,
+        "apellido_mostrar": "Gargano",
+        "apellido_juego": "GARGANO",
+        "nombre_completo": "Walter Gargano",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "52266",
+        "fila": 2
+      },
+      {
+        "numero": 17,
+        "apellido_mostrar": "Arévalo Ríos",
+        "apellido_juego": "AREVALORIOS",
+        "nombre_completo": "Egidio Arévalo Ríos",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "54818",
+        "fila": 2
+      },
+      {
+        "numero": 15,
+        "apellido_mostrar": "Pérez",
+        "apellido_juego": "PEREZ",
+        "nombre_completo": "Diego Pérez",
+        "posicion": "Right Midfield",
+        "capitan": false,
+        "tm_id": "20378",
+        "fila": 2
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cavani",
+        "apellido_juego": "CAVANI",
+        "nombre_completo": "Edinson Cavani",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "48280",
+        "fila": 3
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Forlán",
+        "apellido_juego": "FORLAN",
+        "nombre_completo": "Diego Forlán",
+        "posicion": "Centre-Forward",
+        "capitan": true,
+        "tm_id": "3408",
+        "fila": 3
+      }
+    ],
+    "url_transfermarkt": "https://www.transfermarkt.com/spielbericht/index/spielbericht/1029770",
+    "verificado": true,
+    "errores": [],
+    "avisos": []
+  },
+  {
+    "id": "tm-1030711",
+    "fecha": "2010-07-10",
+    "competicion": "World Cup",
+    "ronda": "Third Place Play-Off",
+    "local": "Uruguay",
+    "visitante": "Germany",
+    "resultado": "2-3",
+    "equipo_del_once": "local",
+    "club_once": "uruguay",
+    "club_rival": null,
+    "formacion": "4-4-2",
+    "dato_curioso": "",
+    "jugadores": [
+      {
+        "numero": 1,
+        "apellido_mostrar": "Muslera",
+        "apellido_juego": "MUSLERA",
+        "nombre_completo": "Fernando Muslera",
+        "posicion": "Goalkeeper",
+        "capitan": false,
+        "tm_id": "58088",
+        "fila": 0
+      },
+      {
+        "numero": 22,
+        "apellido_mostrar": "Cáceres",
+        "apellido_juego": "CACERES",
+        "nombre_completo": "Martín Cáceres",
+        "posicion": "Left-Back",
+        "capitan": false,
+        "tm_id": "54935",
+        "fila": 1
+      },
+      {
+        "numero": 3,
+        "apellido_mostrar": "Godín",
+        "apellido_juego": "GODIN",
+        "nombre_completo": "Diego Godín",
+        "posicion": "Centre-Back",
+        "capitan": false,
+        "tm_id": "54928",
+        "fila": 1
+      },
+      {
+        "numero": 2,
+        "apellido_mostrar": "Lugano",
+        "apellido_juego": "LUGANO",
+        "nombre_completo": "Diego Lugano",
+        "posicion": "Centre-Back",
+        "capitan": true,
+        "tm_id": "13829",
+        "fila": 1
+      },
+      {
+        "numero": 4,
+        "apellido_mostrar": "Fucile",
+        "apellido_juego": "FUCILE",
+        "nombre_completo": "Jorge Fucile",
+        "posicion": "Right-Back",
+        "capitan": false,
+        "tm_id": "44057",
+        "fila": 1
+      },
+      {
+        "numero": 7,
+        "apellido_mostrar": "Cavani",
+        "apellido_juego": "CAVANI",
+        "nombre_completo": "Edinson Cavani",
+        "posicion": "Left Midfield",
+        "capitan": false,
+        "tm_id": "48280",
+        "fila": 2
+      },
+      {
+        "numero": 15,
+        "apellido_mostrar": "Pérez",
+        "apellido_juego": "PEREZ",
+        "nombre_completo": "Diego Pérez",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "20378",
+        "fila": 2
+      },
+      {
+        "numero": 17,
+        "apellido_mostrar": "Arévalo Ríos",
+        "apellido_juego": "AREVALORIOS",
+        "nombre_completo": "Egidio Arévalo Ríos",
+        "posicion": "Defensive Midfield",
+        "capitan": false,
+        "tm_id": "54818",
+        "fila": 2
+      },
+      {
+        "numero": 16,
+        "apellido_mostrar": "M. Pereira",
+        "apellido_juego": "MPEREIRA",
+        "nombre_completo": "Maxi Pereira",
+        "posicion": "Right Midfield",
+        "capitan": false,
+        "tm_id": "57834",
+        "fila": 2
+      },
+      {
+        "numero": 9,
+        "apellido_mostrar": "Suárez",
+        "apellido_juego": "SUAREZ",
+        "nombre_completo": "Luis Suárez",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "44352",
+        "fila": 3
+      },
+      {
+        "numero": 10,
+        "apellido_mostrar": "Forlán",
+        "apellido_juego": "FORLAN",
+        "nombre_completo": "Diego Forlán",
+        "posicion": "Centre-Forward",
+        "capitan": false,
+        "tm_id": "3408",
+        "fila": 3
+      }
+    ],
+    "url_transfermarkt": "https://www.transfermarkt.com/spielbericht/index/spielbericht/1030711",
+    "verificado": true,
+    "errores": [],
+    "avisos": []
+  }
+]

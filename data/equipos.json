@@ -26,5 +26,6 @@
   "cerrito": { "nombre": "Cerrito", "primario": "#ffd100", "secundario": "#1f8a3a", "numero": "#1f8a3a", "patron": "liso", "alias": ["Cerrito", "Club Sportivo Cerrito", "Sportivo Cerrito"] },
   "rampla": { "nombre": "Rampla Juniors", "primario": "#1f8a3a", "secundario": "#d11a1a", "numero": "#ffffff", "patron": "rayas", "alias": ["Rampla Juniors", "Rampla Juniors FC"] },
   "bellavista": { "nombre": "Bella Vista", "primario": "#ffd100", "secundario": "#ffffff", "numero": "#111111", "patron": "liso", "alias": ["Bella Vista", "CA Bella Vista", "Club Atlético Bella Vista"] },
-  "uruguaymontevideo": { "nombre": "Uruguay Montevideo", "primario": "#6fb7e8", "secundario": "#ffffff", "numero": "#111111", "patron": "liso", "alias": ["Uruguay Montevideo", "Uruguay Montevideo FC"] }
+  "uruguaymontevideo": { "nombre": "Uruguay Montevideo", "primario": "#6fb7e8", "secundario": "#ffffff", "numero": "#111111", "patron": "liso", "alias": ["Uruguay Montevideo", "Uruguay Montevideo FC"] },
+  "uruguay": { "nombre": "Uruguay", "primario": "#4aabdb", "secundario": "#0a1e3f", "numero": "#ffffff", "patron": "liso", "alias": ["Uruguay", "Uruguay national football team", "Selección de Uruguay"] }
 }

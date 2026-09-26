@@ -142,24 +142,29 @@ function parsearCancha($) {
   const porEquipo = [];
   $('.aufstellung-box, .aufstellung-spielfeld-container, .large-6.columns').each((_, box) => {
     const jugadores = {};
-    $(box)
-      .find('[style*="top"][style*="left"]')
-      .each((_, el) => {
-        const a = $(el).find('a[href*="/spieler/"]').first();
-        const id = idJugador(a.attr('href'));
-        if (!id || jugadores[id]) return;
-        const st = $(el).attr('style');
-        const top = parseFloat((st.match(/top:\s*([\d.]+)%/) || [])[1]);
-        const left = parseFloat((st.match(/left:\s*([\d.]+)%/) || [])[1]);
-        const numero = limpio($(el).find('.tm-shirt-number, .aufstellung-rueckennummer').first().text());
-        jugadores[id] = {
-          corto: limpio(a.text()) || limpio(a.attr('title')),
-          top: isNaN(top) ? null : top,
-          left: isNaN(left) ? null : left,
-          numero: numero || null,
-          capitan: $(el).find('[class*="kapitaen"], [title="Captain"], [title="Capitán"]').length > 0,
-        };
-      });
+    // .formation-player-container es el marcador real de cada jugador. Un selector genérico por
+    // estilo también matea el div contenedor de toda la cancha (top:0;left:0, sin %), que envuelve
+    // a los 11 y "roba" el primer jugador con coordenadas nulas; por eso va primero y sin fallback
+    // salvo que la página no lo tenga.
+    let marcadores = $(box).find('.formation-player-container');
+    if (!marcadores.length) marcadores = $(box).find('[style*="top"][style*="left"]');
+    marcadores.each((_, el) => {
+      const a = $(el).find('a[href*="/spieler/"]').first();
+      const id = idJugador(a.attr('href'));
+      if (!id || jugadores[id]) return;
+      const st = $(el).attr('style');
+      const top = parseFloat((st.match(/top:\s*([\d.]+)%/) || [])[1]);
+      const left = parseFloat((st.match(/left:\s*([\d.]+)%/) || [])[1]);
+      if (isNaN(top) || isNaN(left)) return; // no es un marcador de cancha real
+      const numero = limpio($(el).find('.tm-shirt-number, .aufstellung-rueckennummer').first().text());
+      jugadores[id] = {
+        corto: limpio(a.text()) || limpio(a.attr('title')),
+        top,
+        left,
+        numero: numero || null,
+        capitan: $(el).find('[class*="kapitaen"], [title="Captain"], [title="Capitán"]').length > 0,
+      };
+    });
     if (Object.keys(jugadores).length >= 11) porEquipo.push(jugadores);
   });
   return porEquipo; // [local, visitante] si los encontró
@@ -191,7 +196,14 @@ function parsearTablas($) {
     const titulo = limpio(box.find('.content-box-headline, h2').first().text());
     equipos.push({ titulares, titulo });
   });
-  // Formación: "Starting Line-up: 4-3-3 Attacking" (o su versión en español/alemán), local primero.
+  return { equipos };
+}
+
+const esArquero = (pos) => /goalkeeper|portero|arquero|guardameta|torwart|keeper/i.test(pos || '');
+
+// Formación: "Starting Line-up: 4-3-3 Attacking" (o su versión en español/alemán), local primero.
+// Transfermarkt la muestra en la página del informe (bericht); puede faltar en la de alineación.
+function parsearFormaciones($) {
   const formaciones = [];
   const re = /(?:Starting Line-up|Once inicial|Alineaci[oó]n inicial|Startaufstellung)\s*:?\s*(\d(?:\s*-\s*\d){1,5})/gi;
   const txt = $('body').text();
@@ -204,10 +216,8 @@ function parsearTablas($) {
       if (f) formaciones.push(f[1]);
     });
   }
-  return { equipos, formaciones };
+  return formaciones;
 }
-
-const esArquero = (pos) => /goalkeeper|portero|arquero|guardameta|torwart|keeper/i.test(pos || '');
 
 // ---------- apellidos ----------
 function sacarApellido(corto, completo) {
@@ -280,10 +290,13 @@ function armarPartido(entrada, htmlB, htmlA, equipos, overrides) {
 
   const lado = entrada.lado === 'visitante' ? 1 : 0;
   const tablas = parsearTablas($a);
-  const cancha = parsearCancha($b).length >= 2 ? parsearCancha($b) : parsearCancha($a);
+  const canchaB = parsearCancha($b);
+  const cancha = canchaB.length >= 2 ? canchaB : parsearCancha($a);
   const tabla = tablas.equipos[lado];
   const canchaEq = cancha[lado] || {};
-  const formacion = tablas.formaciones[lado] || null;
+  let formaciones = parsearFormaciones($a);
+  if (formaciones.length < 2) formaciones = parsearFormaciones($b);
+  const formacion = formaciones[lado] || null;
 
   if (!cab.fecha) errores.push('sin fecha');
   if (!cab.resultado) errores.push('sin resultado');
