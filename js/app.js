@@ -119,6 +119,20 @@ function camisetaArquero(e) {
   return { primario: amarillo ? '#22c55e' : '#f5d90a', secundario: '#111111', numero: '#111111', patron: 'liso' };
 }
 
+// Pelota en pixel art (mismo estilo pixelado que la camiseta), sin fondo.
+const PELOTA = ['.BBBBB.', 'BWWBWWB', 'BWBWBWB', 'BBWWWBB', 'BWBWBWB', 'BWWBWWB', '.BBBBB.'];
+function pelotaSVG() {
+  const H = PELOTA.length, W = PELOTA[0].length;
+  let rects = '';
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const c = PELOTA[y][x];
+      if (c === '.') continue;
+      rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${c === 'B' ? '#111111' : '#f4f4f4'}"/>`;
+    }
+  return `<svg class="pelota" viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+}
+
 // ---------- carga de datos ----------
 async function cargar() {
   const [eq, ms] = await Promise.all([
@@ -267,7 +281,7 @@ function pintarCancha(p) {
             const txt = e === 'pendiente' ? j.apellido_juego.replace(/[^ ]/g, '.') : esc(j.apellido_mostrar);
             const cam = j.fila === 0 ? camisetaArquero(once) : once;
             return `<button class="jug ${e}" data-i="${i}" aria-label="Camiseta ${j.numero}">
-              <span class="camiseta-wrap">${camisetaSVG(cam)}<span class="dorsal" style="color:${cam.numero};--sombra:${cam.primario}">${j.numero}</span>${j.capitan ? '<span class="capi">C</span>' : ''}${j.goles ? `<span class="gol">⚽${j.goles > 1 ? `×${j.goles}` : ''}</span>` : ''}</span>
+              <span class="camiseta-wrap">${camisetaSVG(cam)}<span class="dorsal" style="color:${cam.numero};--sombra:${cam.primario}">${j.numero}</span>${j.capitan ? '<span class="capi">C</span>' : ''}${j.goles ? `<span class="gol">${pelotaSVG()}${j.goles > 1 ? `×${j.goles}` : ''}</span>` : ''}</span>
               <span class="etiqueta"><span class="txt">${txt}</span><span class="cnt">${e === 'pista' ? '★' : usados}</span></span>
             </button>`;
           })
