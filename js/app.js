@@ -120,7 +120,17 @@ function camisetaArquero(e) {
 }
 
 // Pelota en pixel art (mismo estilo pixelado que la camiseta), sin fondo.
-const PELOTA = ['.BBBBB.', 'BWWBWWB', 'BWBWBWB', 'BBWWWBB', 'BWBWBWB', 'BWWBWWB', '.BBBBB.'];
+const PELOTA = [
+  '.BBBBBBB.',
+  'BWWWWWWWB',
+  'BWWBBBWWB',
+  'BWBWWWBWB',
+  'BWBWBWBWB',
+  'BWBWWWBWB',
+  'BWWBBBWWB',
+  'BWWWWWWWB',
+  '.BBBBBBB.',
+];
 function pelotaSVG() {
   const H = PELOTA.length, W = PELOTA[0].length;
   let rects = '';

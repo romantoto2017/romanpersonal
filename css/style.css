@@ -118,7 +118,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: #111; color: #fff; font-family: var(--pixel); font-size: 8px; line-height: 1;
   padding: 2px 3px; box-shadow: 0 0 0 1px #fff;
 }
-.gol .pelota { width: 10px; height: 10px; display: block; image-rendering: pixelated; }
+.gol .pelota { width: 16px; height: 16px; display: block; image-rendering: pixelated; }
 .etiqueta {
   display: flex; align-items: stretch; max-width: 100%; background: #f4f4f4; color: #111;
   box-shadow: 0 0 0 2px #111; font-family: var(--pixel); font-size: 10px; line-height: 1; min-height: 16px;
