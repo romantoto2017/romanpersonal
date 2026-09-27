@@ -113,6 +113,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: absolute; right: -4px; bottom: 0; background: #111; color: #fff; font-family: var(--pixel);
   font-size: 9px; padding: 2px 3px; box-shadow: 0 0 0 1px #fff;
 }
+.gol {
+  position: absolute; left: -4px; bottom: 0; background: #fff; font-size: 11px; line-height: 1;
+  padding: 1px 2px; border-radius: 50%; box-shadow: 0 0 0 1px #111;
+}
 .etiqueta {
   display: flex; align-items: stretch; max-width: 100%; background: #f4f4f4; color: #111;
   box-shadow: 0 0 0 2px #111; font-family: var(--pixel); font-size: 10px; line-height: 1; min-height: 16px;

@@ -137,6 +137,22 @@ function parsearCabecera($) {
   return { local, visitante, resultado, fecha, competicion, ronda };
 }
 
+// Goleadores: cuenta goles por tm_id a partir de la sección "Goals" del informe.
+// El primer link de jugador dentro de cada evento es siempre el autor del gol
+// (el segundo, si existe, es "Assist: ..."). Los autogoles no suman (no es un gol
+// a favor del jugador, aunque Transfermarkt lo liste con su nombre).
+function parsearGoleadores($) {
+  const goles = new Map();
+  $('#sb-tore .sb-aktion-aktion').each((_, el) => {
+    const $el = $(el);
+    if (/own[- ]?goal/i.test($el.text())) return;
+    const id = idJugador($el.find('a[href*="/spieler/"]').first().attr('href'));
+    if (!id) return;
+    goles.set(id, (goles.get(id) || 0) + 1);
+  });
+  return goles;
+}
+
 // Vista de cancha: nombre abreviado ("G. De Arrascaeta") + coordenadas, por id de jugador.
 function parsearCancha($) {
   const porEquipo = [];
@@ -297,6 +313,8 @@ function armarPartido(entrada, htmlB, htmlA, equipos, overrides) {
   let formaciones = parsearFormaciones($a);
   if (formaciones.length < 2) formaciones = parsearFormaciones($b);
   const formacion = formaciones[lado] || null;
+  let goleadores = parsearGoleadores($b);
+  if (!goleadores.size) goleadores = parsearGoleadores($a);
 
   if (!cab.fecha) errores.push('sin fecha');
   if (!cab.resultado) errores.push('sin resultado');
@@ -322,6 +340,7 @@ function armarPartido(entrada, htmlB, htmlA, equipos, overrides) {
       nombre_completo: t.nombre_completo,
       posicion: t.posicion,
       capitan: Boolean(t.capitan || c.capitan),
+      goles: goleadores.get(t.tm_id) || 0,
       tm_id: t.tm_id,
       _gk: esArquero(t.posicion),
       _top: c.top ?? null,

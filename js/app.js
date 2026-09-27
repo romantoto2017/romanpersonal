@@ -267,7 +267,7 @@ function pintarCancha(p) {
             const txt = e === 'pendiente' ? j.apellido_juego.replace(/[^ ]/g, '.') : esc(j.apellido_mostrar);
             const cam = j.fila === 0 ? camisetaArquero(once) : once;
             return `<button class="jug ${e}" data-i="${i}" aria-label="Camiseta ${j.numero}">
-              <span class="camiseta-wrap">${camisetaSVG(cam)}<span class="dorsal" style="color:${cam.numero};--sombra:${cam.primario}">${j.numero}</span>${j.capitan ? '<span class="capi">C</span>' : ''}</span>
+              <span class="camiseta-wrap">${camisetaSVG(cam)}<span class="dorsal" style="color:${cam.numero};--sombra:${cam.primario}">${j.numero}</span>${j.capitan ? '<span class="capi">C</span>' : ''}${j.goles ? `<span class="gol">⚽${j.goles > 1 ? `×${j.goles}` : ''}</span>` : ''}</span>
               <span class="etiqueta"><span class="txt">${txt}</span><span class="cnt">${e === 'pista' ? '★' : usados}</span></span>
             </button>`;
           })
@@ -477,7 +477,7 @@ function mostrarResumen(p) {
         : e === 'pista' ? '<span class="pst">pista</span>'
         : e === 'fallado' ? '<span class="mal">✗ 6/6</span>'
         : `<span class="mal">rendido${k ? ` (${k})` : ''}</span>`;
-      return `<tr><td>${j.numero}</td><td>${esc(j.apellido_mostrar)}${j.capitan ? ' (C)' : ''}</td><td>${col}</td></tr>`;
+      return `<tr><td>${j.numero}</td><td>${esc(j.apellido_mostrar)}${j.capitan ? ' (C)' : ''}${j.goles ? ` ⚽${j.goles > 1 ? `×${j.goles}` : ''}` : ''}</td><td>${col}</td></tr>`;
     })
     .join('');
   const idx = partidos.indexOf(p);
