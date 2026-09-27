@@ -122,17 +122,17 @@ function camisetaArquero(e) {
 // Pelota en pixel art: círculo blanco con contorno negro automático (mismo método
 // que camisetaSVG) y un parche negro tipo pentágono adentro, como el ícono ⚽.
 const PELOTA_SIL = [
-  '...XXXXX...',
+  '....XXX....',
+  '..XXXXXXX..',
   '.XXXXXXXXX.',
   'XXXXXXXXXXX',
   'XXXXXXXXXXX',
   'XXXXXXXXXXX',
   'XXXXXXXXXXX',
   'XXXXXXXXXXX',
-  'XXXXXXXXXXX',
-  'XXXXXXXXXXX',
   '.XXXXXXXXX.',
-  '...XXXXX...',
+  '..XXXXXXX..',
+  '....XXX....',
 ];
 const PELOTA_PARCHE = new Set([
   '4,4', '4,5', '4,6',
