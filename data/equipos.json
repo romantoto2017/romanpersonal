@@ -29,5 +29,7 @@
   "uruguaymontevideo": { "nombre": "Uruguay Montevideo", "primario": "#6fb7e8", "secundario": "#ffffff", "numero": "#111111", "patron": "liso", "alias": ["Uruguay Montevideo", "Uruguay Montevideo FC"] },
   "uruguay": { "nombre": "Uruguay", "primario": "#4aabdb", "secundario": "#0a1e3f", "numero": "#ffffff", "patron": "liso", "alias": ["Uruguay", "Uruguay national football team", "Selección de Uruguay"] },
   "laluz": { "nombre": "La Luz FC", "primario": "#ffffff", "secundario": "#1f8a3a", "numero": "#1f8a3a", "patron": "liso", "alias": ["La Luz FC", "La Luz Fútbol Club", "La Luz"] },
-  "tacuarembo": { "nombre": "Tacuarembó FC", "primario": "#d11a1a", "secundario": "#ffffff", "numero": "#ffffff", "patron": "liso", "alias": ["Tacuarembó FC", "Tacuarembó Fútbol Club", "Tacuarembo FC"] }
+  "tacuarembo": { "nombre": "Tacuarembó FC", "primario": "#d11a1a", "secundario": "#ffffff", "numero": "#ffffff", "patron": "liso", "alias": ["Tacuarembó FC", "Tacuarembó Fútbol Club", "Tacuarembo FC"] },
+  "huracan": { "nombre": "Huracán FC", "primario": "#1b3a8c", "secundario": "#ffffff", "numero": "#d11a1a", "patron": "mitad", "alias": ["Huracán FC", "Huracán Fútbol Club", "Huracan FC"] },
+  "rionegro": { "nombre": "IA Río Negro", "primario": "#ffffff", "secundario": "#111111", "numero": "#111111", "patron": "rayas", "alias": ["IA Río Negro", "Institución Atlética Río Negro", "IA Rio Negro"] }
 }
