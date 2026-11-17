@@ -379,7 +379,7 @@ function armarPartido(entrada, htmlB, htmlA, equipos, overrides) {
 
   return {
     partido: {
-      id: `tm-${entrada.id}`,
+      id: entrada.nivelId || `tm-${entrada.id}`,
       fecha: cab.fecha,
       competicion: cab.competicion,
       ronda: cab.ronda,
@@ -415,6 +415,11 @@ function leerEntrada() {
     .map((l) => {
       const [url, lado, dato] = l.split('|').map((x) => (x || '').trim());
       return { ...urlsPartido(url), lado: /visit/i.test(lado) ? 'visitante' : 'local', dato: dato || '' };
+    })
+    .map((e, i, todas) => {
+      // El mismo partido puede jugarse con el once de cada equipo: la segunda aparición lleva sufijo.
+      const repetido = todas.slice(0, i).some((x) => x.id === e.id);
+      return { ...e, nivelId: repetido ? `tm-${e.id}-${e.lado}` : `tm-${e.id}` };
     });
 }
 
@@ -477,7 +482,7 @@ async function main() {
     ? JSON.parse(fs.readFileSync(path.join(DATA, 'matches.json'), 'utf8'))
     : [];
   const nuevos = new Map(partidos.map((p) => [p.id, p]));
-  const orden = entradas.map((e) => `tm-${e.id}`);
+  const orden = entradas.map((e) => e.nivelId);
   const todos = [...orden.map((id) => nuevos.get(id) || prev.find((p) => p.id === id)).filter(Boolean)];
   fs.writeFileSync(path.join(DATA, 'matches.json'), JSON.stringify(todos, null, 2) + '\n');
   escribirRevisar(revisar);
