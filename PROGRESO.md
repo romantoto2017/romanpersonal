@@ -3,9 +3,16 @@
 > Leé SOLO este archivo al retomar. No releas archivos grandes ni vuelvas a pedir páginas que ya estén en /cache.
 
 ## Etapa actual
-**ETAPA 1, 2 y 3 — COMPLETAS.** `data/matches.json` tiene **200 partidos verificados de clubes uruguayos** (2019–2026): los 100 originales + 100 más agregados a pedido del usuario, con foco en variedad de jugadores (ver abajo). Publicado en GitHub Pages / Netlify (ver README).
+**ETAPA 1, 2 y 3 — COMPLETAS.** `data/matches.json` tiene **275 partidos verificados de clubes uruguayos** (2019–2026). Último cambio: ver "Tanda nov 2026". Publicado en GitHub Pages / Netlify (ver README).
 
 **Red:** `www.transfermarkt.com` es accesible desde este entorno, pero tira 403/405 seguido si se pide muy rápido (WAF/anti-bot). Lo que funcionó: pausas de 4 s entre requests normales, reintento único a los 7-10 s ante un 405, y si sigue fallando esperar 15-40 s y reintentar suelto. Nunca hace falta más de 2-3 reintentos por URL.
+
+## Tanda nov 2026 (HECHA): quedan 275 niveles
+- Se sacaron los **25 partidos de Copa AUF Uruguay** (todos tenían un equipo chico). No se agregan nuevos de esa copa.
+- **Final vuelta Uruguayo 2023, Peñarol 0-1 Liverpool en el Campeón del Siglo** (16/12/2023, id 4239869) agregada con el **once de Liverpool** → nivel `tm-4239869-visitante` (el mismo partido ya estaba con el once de Peñarol como `tm-4239869`; el scraper le pone sufijo a la 2ª aparición).
+- **99 partidos de liga de Nacional (49) y Peñarol (50) con onces alternativos**, 2019–2026, sin clásicos ni Copa AUF. Elegidos así: se bajaron los informes de los 463 partidos de liga N/P no usados; para cada titular se calculó en qué % de los partidos de liga de ese año fue titular; puntaje = titulares con <40% ("suplentes habituales"). Elegidos los de mayor puntaje (4 a 10 suplentes en el once, la mayoría 5-7), máx. 8 por club y temporada. Van al final de `partidos.txt`, de menos a más alternativo.
+- Los 275 pasan validación; los 175 previos quedaron idénticos.
+- Herramientas: `scraper/fixtures.mjs` (calendarios de clubes). **Transfermarkt bloquea el `fetch` de Node (403): bajar con `curl`** (UA de Chrome, 4 s de pausa, reintento a los 9 s) a `cache/<id>_informe.html` (`/spielbericht/index/spielbericht/<id>`) y `cache/<id>_alineacion.html` (`/spielbericht/aufstellung/spielbericht/<id>`), y después `node scraper/scrape.mjs --solo-cache`.
 
 ## Hecho
 - Motor Wordle por jugador (`js/logic.js`): normalización, letras repetidas, teclado, estados, `normalizarApellido()` (conserva un espacio en apellidos compuestos). 12 tests OK (`npm test`).
@@ -22,7 +29,7 @@
 - `data/demo.json`: sin uso mientras `matches.json` tenga partidos verificados (solo es fallback).
 - Pixel art propio para la pelota de gol (⚽): `pelotaSVG()` en `js/app.js`, círculo con contorno negro automático (mismo método que las camisetas) y parche tipo pentágono adentro. Varias iteraciones hasta que se viera bien (ver historial de commits si hace falta tocarla).
 
-## Los 200 partidos (`data/matches.json`, `scraper/partidos.txt`)
+## Los primeros 200 partidos (después se sacaron los 25 de Copa AUF Uruguay) (`data/matches.json`, `scraper/partidos.txt`)
 **Primeros 100** (líneas 1-104 de `partidos.txt`): bajando los fixtures completos de Transfermarkt 2018–2025 (season_id) de Nacional (866) y Peñarol (861), más Liverpool/Danubio/Defensor/Wanderers/Racing/Cerro/Progreso/Boston River para partidos memorables de otros clubes. ~78% N/P, ~45/55 liga/copas, priorizando partidos importantes (clásicos, finales, semis continentales).
 
 **Segundos 100** (líneas 105-204): mismo pool de fixtures (ya descargado, reusado de `/tmp/tm_fixtures` si sigue vivo — si no, hay que rehacerlo: ids de verein en el código de abajo). A pedido del usuario, esta tanda **no prioriza partidos importantes sino variedad de plantel**: reparte parejo entre Liga AUF Intermedio, fase de grupos de Libertadores/Sudamericana y rondas comunes de liga (donde los clubes rotan más), con muestreo aleatorio en vez de por goleada/resultado. Resultado verificado: 117 jugadores que nunca habían aparecido en los primeros 100 (sobre 319 únicos en esta tanda). Los arqueros titulares sí se repiten bastante entre tandas — es esperable, un club no cambia de arquero seguido.
